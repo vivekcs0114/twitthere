@@ -9,6 +9,12 @@ var morgan=require('morgan');
 var mongoose=require('mongoose');
 var confData=require('./config');
 var path=require('path');
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'POST,GET,PUT,DELETE');
+    res.header('Access-Control-Allow-Headers', 'accept');
+    next();
+});
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 app.use('/client', express.static(path.join(__dirname, 'client')));
 mongoose.connect(confData.db);
